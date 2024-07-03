@@ -50,12 +50,27 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	}
 
 	/**
+	 * ACF field groups.
+	 *
+	 * @since 1.0.0
+	 */
+	public function hashcode_cs_acf_field_groups() {
+
+		if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+			return;
+		}
+
+		require_once plugin_dir_path( __DIR__ ) . 'admin/includes/acf/cross-sells-settings.php';
+	}
+
+	/**
 	 * Cross-sells shortcode.
 	 *
 	 * @since 1.0.0
 	 */
 	public function hashcode_cs_shortcode() {
 		add_shortcode( 'product_cross_sells', array( $this, 'hashcode_cs_shortcode_callback' ) );
+		//remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 	}
 
 	/**
@@ -277,6 +292,15 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
+	public function hashcode_cross_sell_section_display_action() {
+		$this->hashcode_cross_sell_display( get_the_ID() );
+	}
+
+	/**
+	 * Cross-sells section automatic display.
+	 *
+	 * @since 1.0.0
+	 */
 	public function hashcode_cross_sell_section_display() {
 
 		if ( ! is_product() ) {
@@ -301,7 +325,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 			$display_type = WC_Admin_Settings::get_option( 'hashcode_cross_sell_display' );
 
 			if ( ! empty( $display_type ) && 'auto' === $display_type ) {
-				add_action( 'woocommerce_after_single_product_summary', 'woocommerce_cross_sell_display' );
+				add_action( 'woocommerce_after_single_product_summary', array( $this, 'hashcode_cross_sell_section_display_action' ) );
 
 				$related_products_display = WC_Admin_Settings::get_option( 'hashcode_cross_sell_related' );
 
