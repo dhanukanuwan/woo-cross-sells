@@ -67,7 +67,6 @@ class Hashcode_Woo_Cross_Sells {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
 	}
 
 	/**
@@ -105,12 +104,6 @@ class Hashcode_Woo_Cross_Sells {
 		 */
 		require_once plugin_dir_path( __DIR__ ) . 'admin/class-hashcode-woo-cross-sells-admin.php';
 
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( __DIR__ ) . 'public/class-hashcode-woo-cross-sells-public.php';
-
 		$this->loader = new Hashcode_Woo_Cross_Sells_Loader();
 
 	}
@@ -129,7 +122,6 @@ class Hashcode_Woo_Cross_Sells {
 		$plugin_i18n = new Hashcode_Woo_Cross_Sells_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -143,25 +135,14 @@ class Hashcode_Woo_Cross_Sells {
 
 		$plugin_admin = new Hashcode_Woo_Cross_Sells_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $plugin_admin, 'hashcode_cs_shortcode' );
+		$this->loader->add_action( 'template_redirect', $plugin_admin, 'hashcode_cross_sell_section_display' );
+		$this->loader->add_action( 'woocommerce_settings_hashcode_cross_sell', $plugin_admin, 'hashcode_cross_sell_settings_tab_content' );
+		$this->loader->add_action( 'woocommerce_settings_save_hashcode_cross_sell', $plugin_admin, 'hashcode_cross_sell_settings_tab_save' );
 
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Hashcode_Woo_Cross_Sells_Public( $this->get_plugin_name(), $this->get_version() );
-
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		$this->loader->add_filter( 'woocommerce_cross_sells_columns', $plugin_admin, 'hashcode_cross_sells_columns', 30 );
+		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_admin, 'hashcode_cross_sell_settings_tab', 50 );
+		$this->loader->add_filter( 'woocommerce_product_cross_sells_products_heading', $plugin_admin, 'hashcode_cross_sell_section_title', 30 );
 	}
 
 	/**
@@ -203,5 +184,4 @@ class Hashcode_Woo_Cross_Sells {
 	public function get_version() {
 		return $this->version;
 	}
-
 }
