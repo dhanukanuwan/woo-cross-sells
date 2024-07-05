@@ -15,4 +15,3 @@ If you need help with any customizations, please send me an email to dhanuka@has
 == Dependancies ==
 
 1. WooCommerce
-2. Advanced Custom Fields

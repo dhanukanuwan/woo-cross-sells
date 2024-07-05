@@ -50,27 +50,12 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	}
 
 	/**
-	 * ACF field groups.
-	 *
-	 * @since 1.0.0
-	 */
-	public function hashcode_cs_acf_field_groups() {
-
-		if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-			return;
-		}
-
-		require_once plugin_dir_path( __DIR__ ) . 'admin/includes/acf/cross-sells-settings.php';
-	}
-
-	/**
 	 * Cross-sells shortcode.
 	 *
 	 * @since 1.0.0
 	 */
 	public function hashcode_cs_shortcode() {
 		add_shortcode( 'product_cross_sells', array( $this, 'hashcode_cs_shortcode_callback' ) );
-		//remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 	}
 
 	/**
@@ -280,9 +265,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 
 		$new_title = WC_Admin_Settings::get_option( 'hashcode_cross_sell_title' );
 
-		if ( ! empty( $new_title ) ) {
-			$section_title = $new_title;
-		}
+		$section_title = $new_title;
 
 		return $section_title;
 	}
