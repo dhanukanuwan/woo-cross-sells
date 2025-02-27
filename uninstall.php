@@ -19,10 +19,10 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
+ * @package    Wpdoctor_Woo_Cross_Sells
  */
 
 // If uninstall not called from WordPress, then exit.

@@ -2,21 +2,21 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/admin
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/admin
  */
 
 /**
  * The admin-specific functionality of the plugin.
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/admin
- * @author     Dhanuka Gunarathna <dhanuka@hashcodeab.se>
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/admin
+ * @author     Dhanuka Gunarathna <dhanuka@wpdoctor.se>
  */
-class Hashcode_Woo_Cross_Sells_Admin {
+class Wpdoctor_Woo_Cross_Sells_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -54,8 +54,8 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function hashcode_cs_shortcode() {
-		add_shortcode( 'product_cross_sells', array( $this, 'hashcode_cs_shortcode_callback' ) );
+	public function wpdoctor_cs_shortcode() {
+		add_shortcode( 'product_cross_sells', array( $this, 'wpdoctor_cs_shortcode_callback' ) );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 * @since 1.0.0
 	 * @param array $atts .
 	 */
-	public function hashcode_cs_shortcode_callback( $atts ) {
+	public function wpdoctor_cs_shortcode_callback( $atts ) {
 
 		$attributes = shortcode_atts(
 			array(
@@ -83,7 +83,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 		}
 
 		ob_start();
-		$this->hashcode_cross_sell_display( $product_id );
+		$this->wpdoctor_cross_sell_display( $product_id );
 		return ob_get_clean();
 	}
 
@@ -93,9 +93,9 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 * @since 1.0.0
 	 * @param array $columns .
 	 */
-	public function hashcode_cross_sells_columns( $columns ) {
+	public function wpdoctor_cross_sells_columns( $columns ) {
 
-		$new_columns_number = WC_Admin_Settings::get_option( 'hashcode_cross_sell_columns' );
+		$new_columns_number = WC_Admin_Settings::get_option( 'wpdoctor_cross_sell_columns' );
 
 		if ( ! empty( $new_columns_number ) ) {
 			$columns = (int) $new_columns_number;
@@ -110,7 +110,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 * @since 1.0.0
 	 * @param int $product_id .
 	 */
-	public function hashcode_cross_sell_display( $product_id ) {
+	public function wpdoctor_cross_sell_display( $product_id ) {
 
 		$cross_sells_ids = array();
 		$cross_sells     = array();
@@ -123,7 +123,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 
 		if ( ! empty( $cross_sells_ids ) ) {
 
-			$related_products_display = WC_Admin_Settings::get_option( 'hashcode_cross_sell_related' );
+			$related_products_display = WC_Admin_Settings::get_option( 'wpdoctor_cross_sell_related' );
 
 			if ( ! empty( $related_products_display ) && 'hide' === $related_products_display ) {
 
@@ -171,9 +171,9 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 * @since 1.0.0
 	 * @param array $tabs .
 	 */
-	public function hashcode_cross_sell_settings_tab( $tabs ) {
+	public function wpdoctor_cross_sell_settings_tab( $tabs ) {
 
-		$tabs['hashcode_cross_sell'] = __( 'Cross-sells on Product Pages', 'hashcode-woo-cross-sells' );
+		$tabs['wpdoctor_cross_sell'] = __( 'Cross-sells on Product Pages', 'wpdoctor-woo-cross-sells' );
 
 		return $tabs;
 	}
@@ -183,9 +183,9 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function hashcode_cross_sell_settings_tab_content() {
+	public function wpdoctor_cross_sell_settings_tab_content() {
 
-		WC_Admin_Settings::output_fields( $this->hashcode_cross_sell_settings() );
+		WC_Admin_Settings::output_fields( $this->wpdoctor_cross_sell_settings() );
 	}
 
 	/**
@@ -193,9 +193,9 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function hashcode_cross_sell_settings_tab_save() {
+	public function wpdoctor_cross_sell_settings_tab_save() {
 
-		WC_Admin_Settings::save_fields( $this->hashcode_cross_sell_settings() );
+		WC_Admin_Settings::save_fields( $this->wpdoctor_cross_sell_settings() );
 	}
 
 	/**
@@ -203,24 +203,24 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	private function hashcode_cross_sell_settings() {
+	private function wpdoctor_cross_sell_settings() {
 
 		$settings = array(
 			array(
-				'name' => __( 'Product Cross-sells Global Settings', 'hashcode-woo-cross-sells' ),
+				'name' => __( 'Product Cross-sells Global Settings', 'wpdoctor-woo-cross-sells' ),
 				'type' => 'title',
-				'desc' => __( 'These settings will be applied to all products available and, will only be applied on individual product pages.', 'hashcode-woo-cross-sells' ),
+				'desc' => __( 'These settings will be applied to all products available and, will only be applied on individual product pages.', 'wpdoctor-woo-cross-sells' ),
 			),
 			array(
-				'name'     => __( 'Cross-sells Section Title', 'hashcode-woo-cross-sells' ),
-				'desc_tip' => __( 'Override default WooCommerce Cross-sell section title', 'hashcode-woo-cross-sells' ),
-				'id'       => 'hashcode_cross_sell_title',
+				'name'     => __( 'Cross-sells Section Title', 'wpdoctor-woo-cross-sells' ),
+				'desc_tip' => __( 'Override default WooCommerce Cross-sell section title', 'wpdoctor-woo-cross-sells' ),
+				'id'       => 'wpdoctor_cross_sell_title',
 				'type'     => 'text',
 			),
 			array(
-				'name'              => __( 'Cross-sells Section Columns', 'hashcode-woo-cross-sells' ),
-				'desc_tip'          => __( 'Number of columns to be displayed in a row.', 'hashcode-woo-cross-sells' ),
-				'id'                => 'hashcode_cross_sell_columns',
+				'name'              => __( 'Cross-sells Section Columns', 'wpdoctor-woo-cross-sells' ),
+				'desc_tip'          => __( 'Number of columns to be displayed in a row.', 'wpdoctor-woo-cross-sells' ),
+				'id'                => 'wpdoctor_cross_sell_columns',
 				'type'              => 'number',
 				'custom_attributes' => array(
 					'min' => 1,
@@ -228,23 +228,23 @@ class Hashcode_Woo_Cross_Sells_Admin {
 				),
 			),
 			array(
-				'name'     => __( 'Cross-sells display', 'hashcode-woo-cross-sells' ),
-				'desc_tip' => __( 'Automatically display cross sells when cross sells are available for a product. ', 'hashcode-woo-cross-sells' ),
-				'id'       => 'hashcode_cross_sell_display',
+				'name'     => __( 'Cross-sells display', 'wpdoctor-woo-cross-sells' ),
+				'desc_tip' => __( 'Automatically display cross sells when cross sells are available for a product. ', 'wpdoctor-woo-cross-sells' ),
+				'id'       => 'wpdoctor_cross_sell_display',
 				'type'     => 'radio',
 				'options'  => array(
-					'auto'   => __( 'Automatically display cross sells when cross sells are available for a product.', 'hashcode-woo-cross-sells' ),
-					'manual' => __( 'Activated manually by using [product_cross_sells] shortcode.', 'hashcode-woo-cross-sells' ),
+					'auto'   => __( 'Automatically display cross sells when cross sells are available for a product.', 'wpdoctor-woo-cross-sells' ),
+					'manual' => __( 'Activated manually by using [product_cross_sells] shortcode.', 'wpdoctor-woo-cross-sells' ),
 				),
 			),
 			array(
-				'name'     => __( 'Related Products', 'hashcode-woo-cross-sells' ),
-				'desc_tip' => __( 'Hide or keep related product when cross sells are available for a product. ', 'hashcode-woo-cross-sells' ),
-				'id'       => 'hashcode_cross_sell_related',
+				'name'     => __( 'Related Products', 'wpdoctor-woo-cross-sells' ),
+				'desc_tip' => __( 'Hide or keep related product when cross sells are available for a product. ', 'wpdoctor-woo-cross-sells' ),
+				'id'       => 'wpdoctor_cross_sell_related',
 				'type'     => 'radio',
 				'options'  => array(
-					'hide' => __( 'Hide related products when cross sells are available.', 'hashcode-woo-cross-sells' ),
-					'keep' => __( 'Do nothing.', 'hashcode-woo-cross-sells' ),
+					'hide' => __( 'Hide related products when cross sells are available.', 'wpdoctor-woo-cross-sells' ),
+					'keep' => __( 'Do nothing.', 'wpdoctor-woo-cross-sells' ),
 				),
 			),
 			array(
@@ -261,9 +261,9 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 * @since 1.0.0
 	 * @param string $section_title .
 	 */
-	public function hashcode_cross_sell_section_title( $section_title ) {
+	public function wpdoctor_cross_sell_section_title( $section_title ) {
 
-		$new_title = WC_Admin_Settings::get_option( 'hashcode_cross_sell_title' );
+		$new_title = WC_Admin_Settings::get_option( 'wpdoctor_cross_sell_title' );
 
 		$section_title = $new_title;
 
@@ -275,8 +275,8 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function hashcode_cross_sell_section_display_action() {
-		$this->hashcode_cross_sell_display( get_the_ID() );
+	public function wpdoctor_cross_sell_section_display_action() {
+		$this->wpdoctor_cross_sell_display( get_the_ID() );
 	}
 
 	/**
@@ -284,7 +284,7 @@ class Hashcode_Woo_Cross_Sells_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function hashcode_cross_sell_section_display() {
+	public function wpdoctor_cross_sell_section_display() {
 
 		if ( ! is_product() ) {
 			return;
@@ -305,12 +305,12 @@ class Hashcode_Woo_Cross_Sells_Admin {
 		}
 
 		if ( ! empty( $cross_sells_ids ) ) {
-			$display_type = WC_Admin_Settings::get_option( 'hashcode_cross_sell_display' );
+			$display_type = WC_Admin_Settings::get_option( 'wpdoctor_cross_sell_display' );
 
 			if ( ! empty( $display_type ) && 'auto' === $display_type ) {
-				add_action( 'woocommerce_after_single_product_summary', array( $this, 'hashcode_cross_sell_section_display_action' ) );
+				add_action( 'woocommerce_after_single_product_summary', array( $this, 'wpdoctor_cross_sell_section_display_action' ) );
 
-				$related_products_display = WC_Admin_Settings::get_option( 'hashcode_cross_sell_related' );
+				$related_products_display = WC_Admin_Settings::get_option( 'wpdoctor_cross_sell_related' );
 
 				if ( ! empty( $related_products_display ) && 'hide' === $related_products_display ) {
 

@@ -6,11 +6,11 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
- * @author     Dhanuka Gunarathna <dhanuka@hashcodeab.se>
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
+ * @author     Dhanuka Gunarathna <dhanuka@wpdoctor.se>
  */
-class Hashcode_Woo_Cross_Sells_i18n {
+class Wpdoctor_Woo_Cross_Sells_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Hashcode_Woo_Cross_Sells_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'hashcode-woo-cross-sells',
+			'wpdoctor-woo-cross-sells',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

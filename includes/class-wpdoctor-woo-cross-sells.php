@@ -2,22 +2,22 @@
 /**
  * The file that defines the core plugin class
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
  */
 
 /**
  * The core plugin class.
  *
  * @since      1.0.0
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
- * @author     Dhanuka Gunarathna <dhanuka@hashcodeab.se>
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
+ * @author     Dhanuka Gunarathna <dhanuka@wpdoctor.se>
  */
-class Hashcode_Woo_Cross_Sells {
+class Wpdoctor_Woo_Cross_Sells {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -25,7 +25,7 @@ class Hashcode_Woo_Cross_Sells {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Hashcode_Woo_Cross_Sells_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Wpdoctor_Woo_Cross_Sells_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -57,12 +57,12 @@ class Hashcode_Woo_Cross_Sells {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'HASHCODE_WOO_CROSS_SELLS_VERSION' ) ) {
-			$this->version = HASHCODE_WOO_CROSS_SELLS_VERSION;
+		if ( defined( 'WPDOCTOR_WOO_CROSS_SELLS_VERSION' ) ) {
+			$this->version = WPDOCTOR_WOO_CROSS_SELLS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'hashcode-woo-cross-sells';
+		$this->plugin_name = 'wpdoctor-woo-cross-sells';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -74,10 +74,10 @@ class Hashcode_Woo_Cross_Sells {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Hashcode_Woo_Cross_Sells_Loader. Orchestrates the hooks of the plugin.
-	 * - Hashcode_Woo_Cross_Sells_i18n. Defines internationalization functionality.
-	 * - Hashcode_Woo_Cross_Sells_Admin. Defines all hooks for the admin area.
-	 * - Hashcode_Woo_Cross_Sells_Public. Defines all hooks for the public side of the site.
+	 * - Wpdoctor_Woo_Cross_Sells_Loader. Orchestrates the hooks of the plugin.
+	 * - Wpdoctor_Woo_Cross_Sells_i18n. Defines internationalization functionality.
+	 * - Wpdoctor_Woo_Cross_Sells_Admin. Defines all hooks for the admin area.
+	 * - Wpdoctor_Woo_Cross_Sells_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -91,27 +91,27 @@ class Hashcode_Woo_Cross_Sells {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( __DIR__ ) . 'includes/class-hashcode-woo-cross-sells-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wpdoctor-woo-cross-sells-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( __DIR__ ) . 'includes/class-hashcode-woo-cross-sells-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wpdoctor-woo-cross-sells-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( __DIR__ ) . 'admin/class-hashcode-woo-cross-sells-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-wpdoctor-woo-cross-sells-admin.php';
 
-		$this->loader = new Hashcode_Woo_Cross_Sells_Loader();
+		$this->loader = new Wpdoctor_Woo_Cross_Sells_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Hashcode_Woo_Cross_Sells_i18n class in order to set the domain and to register the hook
+	 * Uses the Wpdoctor_Woo_Cross_Sells_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -119,7 +119,7 @@ class Hashcode_Woo_Cross_Sells {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Hashcode_Woo_Cross_Sells_i18n();
+		$plugin_i18n = new Wpdoctor_Woo_Cross_Sells_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -133,16 +133,16 @@ class Hashcode_Woo_Cross_Sells {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Hashcode_Woo_Cross_Sells_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Wpdoctor_Woo_Cross_Sells_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'init', $plugin_admin, 'hashcode_cs_shortcode' );
-		$this->loader->add_action( 'template_redirect', $plugin_admin, 'hashcode_cross_sell_section_display' );
-		$this->loader->add_action( 'woocommerce_settings_hashcode_cross_sell', $plugin_admin, 'hashcode_cross_sell_settings_tab_content' );
-		$this->loader->add_action( 'woocommerce_settings_save_hashcode_cross_sell', $plugin_admin, 'hashcode_cross_sell_settings_tab_save' );
+		$this->loader->add_action( 'init', $plugin_admin, 'wpdoctor_cs_shortcode' );
+		$this->loader->add_action( 'template_redirect', $plugin_admin, 'wpdoctor_cross_sell_section_display' );
+		$this->loader->add_action( 'woocommerce_settings_wpdoctor_cross_sell', $plugin_admin, 'wpdoctor_cross_sell_settings_tab_content' );
+		$this->loader->add_action( 'woocommerce_settings_save_wpdoctor_cross_sell', $plugin_admin, 'wpdoctor_cross_sell_settings_tab_save' );
 
-		$this->loader->add_filter( 'woocommerce_cross_sells_columns', $plugin_admin, 'hashcode_cross_sells_columns', 30 );
-		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_admin, 'hashcode_cross_sell_settings_tab', 50 );
-		$this->loader->add_filter( 'woocommerce_product_cross_sells_products_heading', $plugin_admin, 'hashcode_cross_sell_section_title', 30 );
+		$this->loader->add_filter( 'woocommerce_cross_sells_columns', $plugin_admin, 'wpdoctor_cross_sells_columns', 30 );
+		$this->loader->add_filter( 'woocommerce_settings_tabs_array', $plugin_admin, 'wpdoctor_cross_sell_settings_tab', 50 );
+		$this->loader->add_filter( 'woocommerce_product_cross_sells_products_heading', $plugin_admin, 'wpdoctor_cross_sell_section_title', 30 );
 	}
 
 	/**
@@ -169,7 +169,7 @@ class Hashcode_Woo_Cross_Sells {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Hashcode_Woo_Cross_Sells_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Wpdoctor_Woo_Cross_Sells_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

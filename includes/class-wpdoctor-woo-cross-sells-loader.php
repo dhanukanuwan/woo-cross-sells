@@ -3,11 +3,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
- * @author     Dhanuka Gunarathna <dhanuka@hashcodeab.se>
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
+ * @author     Dhanuka Gunarathna <dhanuka@wpdoctor.se>
  */
-class Hashcode_Woo_Cross_Sells_Loader {
+class Wpdoctor_Woo_Cross_Sells_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

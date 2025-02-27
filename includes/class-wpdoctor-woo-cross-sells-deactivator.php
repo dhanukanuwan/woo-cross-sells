@@ -3,11 +3,11 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://hashcodeab.se
+ * @link       https://wpdoctor.se
  * @since      1.0.0
  *
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Hashcode_Woo_Cross_Sells
- * @subpackage Hashcode_Woo_Cross_Sells/includes
- * @author     Dhanuka Gunarathna <dhanuka@hashcodeab.se>
+ * @package    Wpdoctor_Woo_Cross_Sells
+ * @subpackage Wpdoctor_Woo_Cross_Sells/includes
+ * @author     Dhanuka Gunarathna <dhanuka@wpdoctor.se>
  */
-class Hashcode_Woo_Cross_Sells_Deactivator {
+class Wpdoctor_Woo_Cross_Sells_Deactivator {
 
 	/**
 	 * Short Description. (use period)
